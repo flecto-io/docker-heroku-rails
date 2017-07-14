@@ -4,9 +4,9 @@ Docker container for Rails based on the new Heroku-16 base image.
 
 ### Tags available
 
-* [2.3.4](2.3.4/Dockerfile)
+* `latest`,`2.3.4` *[(2.3.4/Dockerfile)](2.3.4/Dockerfile)*
 
-_We usually try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
+_We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
 ### Motivation
 The Heroku base images for ruby got [deprecated](https://github.com/heroku/docker-ruby) in favor of a more [build-your-own Dockerfile strategy](https://devcenter.heroku.com/articles/local-development-with-docker-compose). But I still feel that a base image for Rails serves its purposes. There is no point for each developer to replicate much of the instructions I've used here. The more automation the better amirite?
