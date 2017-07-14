@@ -1,13 +1,10 @@
 # Heroku Rails Docker Image
 
-This image is for use with Heroku Docker CLI.
+Docker container for Rails based on the new Heroku-16 base image.
 
 ### Tags available
 
-* [2.2.3](2.2.3/Dockerfile)
-* [2.2.5](2.2.5/Dockerfile)
-* [2.2.6](2.2.6/Dockerfile)
-* [2.2.7](2.2.7/Dockerfile)
+* [2.3.4](2.3.4/Dockerfile)
 
 _We usually try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
@@ -15,8 +12,9 @@ _We usually try to stay up-to-date with the new supported Heroku images. If you 
 The Heroku base images for ruby got [deprecated](https://github.com/heroku/docker-ruby) in favor of a more [build-your-own Dockerfile strategy](https://devcenter.heroku.com/articles/local-development-with-docker-compose). But I still feel that a base image for Rails serves its purposes. There is no point for each developer to replicate much of the instructions I've used here. The more automation the better amirite?
 
 ### Usage
-The root folder for your Rails project must contain the following files:
-* `Gemfile` and `Gemfile.lock`
+The root folder for your Rails project must a `Gemfile` and `Gemfile.lock`.
+
+If you are looking into using docker compose I also recommend having:
 * `Procfile` (see the [Heroku Dev Center](https://devcenter.heroku.com/articles/procfile) for details)
 * `app.json` file with at least these contents (see [app.json Schema](https://devcenter.heroku.com/articles/app-json-schema) for more details):
       ```json
@@ -29,7 +27,7 @@ The root folder for your Rails project must contain the following files:
 
 The build a Dockerfile for your project with this image as base, and with other project-specific instructions:
 ```docker
-FROM jfloff/docker-heroku-rails
+FROM jfloff/docker-heroku-rails:latest
 ```
 
 Then you can either run it with standard Docker `docker run --rm -ti your-project` or, more commonly from a Docker Compose based development `$ docker-compose up web`.
