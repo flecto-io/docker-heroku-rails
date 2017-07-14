@@ -12,4 +12,10 @@ if [ "$RAILS_ENV" == "production" ]; then
   bundle exec rake assets:precompile
 fi
 
+for SCRIPT in /app/.post-run/*; do
+  set -x;
+  source $SCRIPT;
+  { set +x; } 2>/dev/null
+done
+
 exec "$@"

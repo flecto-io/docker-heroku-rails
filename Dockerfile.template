@@ -48,7 +48,9 @@ RUN mkdir -p $WORKDIR_PATH ;\
     #####
     # Set startup script
     #
-    chmod +x /usr/bin/init.sh
+    chmod +x /usr/bin/init.sh ;\
+    # make folder to run startup scripts
+    mkdir -p /app/.post-run/
 
 #####
 # Install application and its gems
