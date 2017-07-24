@@ -15,12 +15,14 @@ ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/h
     # Bundler variables
     GEM_PATH=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
     GEM_HOME=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
-    BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config
+    BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config \
+    POST_RUN_SCRIPT_PATH=/app/.post-run.d
 
 # Copy init script
 COPY ./init.sh /usr/bin/init.sh
 
-RUN mkdir -p $WORKDIR_PATH ;\
+RUN set -ex ;\
+    mkdir -p $WORKDIR_PATH ;\
     #####
     # Install extra dependencies
     #
@@ -50,16 +52,19 @@ RUN mkdir -p $WORKDIR_PATH ;\
     #
     chmod +x /usr/bin/init.sh ;\
     # make folder to run startup scripts
-    mkdir -p /app/.post-run/
+    mkdir -p $POST_RUN_SCRIPT_PATH
 
 #####
 # Install application and its gems
 #
-# add secret key base
-ONBUILD ENV SECRET_KEY_BASE $(openssl rand -base64 32)
-# Run bundler to cache dependencies
 ONBUILD ADD . $WORKDIR_PATH
-ONBUILD RUN bundle install --jobs 4
+ONBUILD RUN set -ex ;\
+            # add secret key base to init
+            echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh ;\
+            chmod +x /etc/profile.d/secret.sh ;\
+            # Run bundler to cache dependencies
+            bundle install --jobs 4
+
 
 WORKDIR $WORKDIR_PATH
 
