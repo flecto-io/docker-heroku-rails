@@ -9,7 +9,10 @@ ENV WORKDIR_PATH=/app/user \
     RUBY_VERSION=2.3.4 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L14
-    NODE_VERSION=6.11.1
+    NODE_VERSION=6.11.1 \
+    # Check this file for BUNDLER version:
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby.rb#L19
+    BUNDLER_VERSION=1.15.2
 
 ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/$PATH \
     # Bundler variables
@@ -44,7 +47,7 @@ RUN set -ex ;\
     # Install Bundler
     #
     mkdir -p /app/heroku/ruby/bundle/ruby/$RUBY_VERSION ;\
-    gem install bundler --no-ri --no-rdoc ;\
+    gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc ;\
     # forcebundle to use github https protocol
     bundle config github.https true ;\
     #####
