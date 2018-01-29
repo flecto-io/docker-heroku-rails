@@ -9,9 +9,7 @@ source /etc/profile.d/secret.sh
 # if any changes to Gemfile occur between runs (e.g. if you mounted the
 # host directory in the container), it will install changes before proceeding
 bundle check || bundle install
-# Runs pending migrations if any pending
-rake db:migrate
-rake db:seed
+# we do not do any db:migrate since that should be in the Procfile
 
 if [ "$RAILS_ENV" == "production" ]; then
   bundle exec rake assets:precompile
