@@ -62,9 +62,6 @@ RUN set -ex ;\
 #
 ADD . $WORKDIR_PATH
 RUN set -ex ;\
-    # add secret key base to init
-    echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh ;\
-    chmod +x /etc/profile.d/secret.sh ;\
     # Run bundler to cache dependencies if we have a Gemfile
     if [ -f $WORKDIR_PATH/Gemfile ]; then bundle install --jobs 4; fi
 

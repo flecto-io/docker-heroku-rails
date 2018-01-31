@@ -4,6 +4,11 @@
 set +e
 
 # export secret before anything
+if [ -f /etc/profile.d/secret.sh ]; then
+  # add secret key base to init
+  chmod +x /etc/profile.d/secret.sh
+  echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh
+fi
 source /etc/profile.d/secret.sh
 
 # if any changes to Gemfile occur between runs (e.g. if you mounted the
