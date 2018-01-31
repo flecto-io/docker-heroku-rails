@@ -3,10 +3,10 @@
 # just keep going if we don't have anything to install
 set +e
 
-if [ -f /etc/profile.d/secret.sh ]; then
+if [ ! -f /etc/profile.d/secret.sh ]; then
   # add secret key base to init
-  chmod +x /etc/profile.d/secret.sh
   echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh
+  chmod +x /etc/profile.d/secret.sh
 fi
 # export secret before anything
 source /etc/profile.d/secret.sh
