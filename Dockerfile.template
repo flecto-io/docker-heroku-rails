@@ -60,14 +60,13 @@ RUN set -ex ;\
 #####
 # Install application and its gems
 #
-ONBUILD ADD . $WORKDIR_PATH
-ONBUILD RUN set -ex ;\
-            # add secret key base to init
-            echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh ;\
-            chmod +x /etc/profile.d/secret.sh ;\
-            # Run bundler to cache dependencies
-            bundle install --jobs 4
-
+ADD . $WORKDIR_PATH
+RUN set -ex ;\
+    # add secret key base to init
+    echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh ;\
+    chmod +x /etc/profile.d/secret.sh ;\
+    # Run bundler to cache dependencies if we have a Gemfile
+    if [ -f $WORKDIR_PATH/Gemfile ]; then bundle install --jobs 4 fi
 
 WORKDIR $WORKDIR_PATH
 
