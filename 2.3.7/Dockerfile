@@ -14,7 +14,7 @@ ENV WORKDIR_PATH=/app/user \
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby.rb#L19
     BUNDLER_VERSION=1.15.2
 
-ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/$PATH \
+ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:${PATH} \
     # Bundler variables
     GEM_PATH=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
     GEM_HOME=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
