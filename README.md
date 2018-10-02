@@ -1,6 +1,6 @@
 # Heroku Rails Docker Image
 
-Docker container for Rails based on the new Heroku-16 base image.
+Docker container for Rails based on the new Heroku-18 base image.
 
 ### Tags available
 
