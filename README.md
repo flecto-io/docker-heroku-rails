@@ -6,7 +6,8 @@ Docker container for Rails based on the new Heroku-16 base image.
 
 * `2.3.4` *[(2.3.4/Dockerfile)](2.3.4/Dockerfile)*
 * `2.3.7` *[(2.3.7/Dockerfile)](2.3.7/Dockerfile)*
-* `latest`,`2.4.4` *[(2.4.4/Dockerfile)](2.4.4/Dockerfile)*
+* `2.4.4` *[(2.4.4/Dockerfile)](2.4.4/Dockerfile)*
+* `latest`,`2.4.5` *[(2.4.5/Dockerfile)](2.4.5/Dockerfile)*
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
@@ -30,7 +31,6 @@ _For more details regarding local development with docker read this [Heroku arti
 ### Post-run script
 This container comes with a [post-run script](init.sh) that:
 - Checks and install any missing gem.
-- Checks if there is any pending migrations and migrates them
 - Precompile your assets if you are in production mode (checks `$RAILS_ENV` value).
 - **Run your own run other post-run scripts**. Just add them to `/app/.post-run.d/` folder (you can also use the env varaible `$POST_RUN_SCRIPT_PATH`, which has the script path).
 
