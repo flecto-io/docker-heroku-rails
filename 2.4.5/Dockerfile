@@ -1,6 +1,6 @@
 FROM heroku/heroku:16-build
 
-LABEL maintainer="jfloff@rnters.pt"
+LABEL maintainer="jfloff@rnters.com"
 
 ENV WORKDIR_PATH=/app/user \
     # The versions are updated according to Heroku Ruby Buildpack
