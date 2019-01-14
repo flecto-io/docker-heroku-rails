@@ -19,7 +19,7 @@ The Heroku base images for ruby got [deprecated](https://github.com/heroku/docke
 ### Usage
 The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions (for example add some *post-run scripts*, see below):
 ```docker
-FROM jfloff/docker-heroku-rails:latest
+FROM jfloff/heroku-rails:latest
 # example of post-run script
 RUN echo "rake db:seed" > $POST_RUN_SCRIPT_PATH/seed.sh
 ```
