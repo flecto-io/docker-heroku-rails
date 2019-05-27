@@ -1,13 +1,14 @@
 # Heroku Rails Docker Image
 
-Docker container for Rails based on the new Heroku-16 base image.
+Docker container for Rails based on the Heroku-18 base images.
 
 ### Tags available
 
 * `2.3.4` *[(2.3.4/Dockerfile)](2.3.4/Dockerfile)*
 * `2.3.7` *[(2.3.7/Dockerfile)](2.3.7/Dockerfile)*
 * `2.4.4` *[(2.4.4/Dockerfile)](2.4.4/Dockerfile)*
-* `latest`,`2.4.5` *[(2.4.5/Dockerfile)](2.4.5/Dockerfile)*
+* `2.4.5` *[(2.4.5/Dockerfile)](2.4.5/Dockerfile)*
+* `latest`,`2.5.5` *[(2.5.5/Dockerfile)](2.5.5/Dockerfile)*
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 

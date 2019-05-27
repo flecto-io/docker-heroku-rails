@@ -6,13 +6,13 @@ ENV WORKDIR_PATH=/app/user \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L15
-    RUBY_VERSION=2.4.4 \
+    RUBY_VERSION=2.5.5 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L14
-    NODE_VERSION=8.10.0 \
-    # Check this file for BUNDLER version:
+    NODE_VERSION=10.14.1 \
+    # This file no longer has a bundler version keeping this is as a temporary fix
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby.rb#L19
-    BUNDLER_VERSION=1.15.2
+    BUNDLER_VERSION=1.17.3
 
 ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:${PATH} \
     # Bundler variables
