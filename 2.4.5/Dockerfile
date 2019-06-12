@@ -34,6 +34,8 @@ RUN set -ex ;\
         tree \
         ; \
     rm -rf /var/lib/apt/lists/* ;\
+    # fix bug when launching rails console
+    ln -s /lib/x86_64-linux-gnu/libreadline.so.7.0 /lib/x86_64-linux-gnu/libreadline.so.6 ;\
     #####
     # Install Ruby
     #
