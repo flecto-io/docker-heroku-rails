@@ -32,6 +32,8 @@ RUN set -ex ;\
     apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
         tree \
+        # for rails rspec
+        busybox \
         ; \
     rm -rf /var/lib/apt/lists/* ;\
     # fix bug when launching rails console
