@@ -8,8 +8,8 @@ ENV WORKDIR_PATH=/app/user \
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L15
     RUBY_VERSION=2.5.5 \
     # Check this file for NODE version:
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L14
-    NODE_VERSION=10.14.1 \
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
+    NODE_VERSION=10.15.3 \
     # This file no longer has a bundler version keeping this is as a temporary fix
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby.rb#L19
     BUNDLER_VERSION=1.17.3
@@ -34,6 +34,9 @@ RUN set -ex ;\
         tree \
         # for rails rspec
         busybox \
+        # utils
+        inetutils-ping \
+        vim \
         ; \
     rm -rf /var/lib/apt/lists/* ;\
     # fix bug when launching rails console
