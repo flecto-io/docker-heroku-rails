@@ -9,12 +9,11 @@ ENV WORKDIR_PATH=/app/user \
     RUBY_VERSION=2.5.5 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
-    NODE_VERSION=10.15.3 \
-    # This file no longer has a bundler version keeping this is as a temporary fix
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby.rb#L19
-    BUNDLER_VERSION=1.17.3
+    NODE_VERSION=10.15.3
 
 ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:${PATH} \
+    # so no interactions happen while installing packages
+    DEBIAN_FRONTEND=noninteractive \
     # Bundler variables
     GEM_PATH=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
     GEM_HOME=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
@@ -52,13 +51,6 @@ RUN set -ex ;\
     curl -sL --retry 3 https://s3pository.heroku.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/ ;\
     mv /app/heroku/ruby/node-v$NODE_VERSION-linux-x64 /app/heroku/ruby/node-$NODE_VERSION ;\
     #####
-    # Install Bundler
-    #
-    mkdir -p /app/heroku/ruby/bundle/ruby/$RUBY_VERSION ;\
-    gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc ;\
-    # forcebundle to use github https protocol
-    bundle config github.https true ;\
-    #####
     # Set startup script
     #
     chmod +x /usr/bin/init.sh ;\
@@ -68,11 +60,19 @@ RUN set -ex ;\
 #####
 # Install application and its gems
 #
-ADD . $WORKDIR_PATH
-RUN set -ex ;\
-    # Run bundler to cache dependencies if we have a Gemfile
-    if [ -f $WORKDIR_PATH/Gemfile ]; then bundle install --jobs 4; fi
-
 WORKDIR $WORKDIR_PATH
+ONBUILD ADD . $WORKDIR_PATH
+ONBUILD RUN set -ex ;\
+    # TODO @jfloff : won't be needed when we upgrade to Rails 5
+    # install bundler packed with Gemfile if we have that information in the Gemfile.lock
+    # ref: https://bundler.io/blog/2019/01/04/an-update-on-the-bundler-2-release.html
+    if [ -f Gemfile.lock ]; then GEMFILE_LOCK_BUNDLE_VERSION=$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock) ; else GEMFILE_LOCK_BUNDLE_VERSION="" ; fi ;\
+    if [ -z "$GEMFILE_LOCK_BUNDLE_VERSION" ]; then BUNDLER_INSTALL_VERSION_FLAG="" ; else BUNDLER_INSTALL_VERSION_FLAG="-v $GEMFILE_LOCK_BUNDLE_VERSION" ; fi ;\
+    gem install --no-ri --no-rdoc bundler $BUNDLER_INSTALL_VERSION_FLAG ;\
+    # force bundle to use github https protocol
+    bundle config github.https true ;\
+    # Run bundler to cache dependencies if we have a Gemfile
+    bundle install --jobs 4
+
 
 ENTRYPOINT ["/usr/bin/init.sh"]
