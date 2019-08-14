@@ -4,7 +4,9 @@
 set +e
 
 # set BUNDLER_VERSION env variable in case we need it
-export BUNDLER_VERSION="$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock)"
+if [ -f Gemfile.lock ]; then
+  GEMFILE_LOCK_BUNDLE_VERSION=$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock)
+fi
 
   # add secret key base to init
 if [ ! -f /etc/profile.d/secret.sh ]; then
