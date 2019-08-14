@@ -70,9 +70,7 @@ ONBUILD RUN set -ex ;\
     if [ -z "$GEMFILE_LOCK_BUNDLE_VERSION" ]; then BUNDLER_INSTALL_VERSION_FLAG="" ; else BUNDLER_INSTALL_VERSION_FLAG="-v $GEMFILE_LOCK_BUNDLE_VERSION" ; fi ;\
     gem install --no-ri --no-rdoc bundler $BUNDLER_INSTALL_VERSION_FLAG ;\
     # force bundle to use github https protocol
-    bundle config github.https true ;\
-    # Run bundler to cache dependencies if we have a Gemfile
-    bundle install --jobs 4
+    bundle config github.https true
 
 
 ENTRYPOINT ["/usr/bin/init.sh"]
