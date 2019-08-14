@@ -3,8 +3,11 @@
 # just keep going if we don't have anything to install
 set +e
 
-if [ ! -f /etc/profile.d/secret.sh ]; then
+# set BUNDLER_VERSION env variable in case we need it
+export BUNDLER_VERSION="$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock)"
+
   # add secret key base to init
+if [ ! -f /etc/profile.d/secret.sh ]; then
   echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh
   chmod +x /etc/profile.d/secret.sh
 fi
@@ -13,9 +16,7 @@ source /etc/profile.d/secret.sh
 
 # if any changes to Gemfile occur between runs (e.g. if you mounted the
 # host directory in the container), it will install changes before proceeding
-if [ -f $WORKDIR_PATH/Gemfile ]; then
-  bundle check || bundle install --jobs 4
-fi
+bundle check || bundle install --jobs 4
 
 if [ "$RAILS_ENV" == "production" ]; then
   bundle exec rake assets:precompile
