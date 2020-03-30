@@ -20,6 +20,18 @@ ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/h
     BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config \
     POST_RUN_SCRIPT_PATH=/app/.post-run.d
 
+# set the locale of the application
+# this is useful for rails console handling UTF8 characters
+ARG LOCALE="en_US.UTF-8"
+ENV LANG=$LOCALE \
+    LC_COLLATE=$LOCALE \
+    LC_CTYPE=$LOCALE \
+    LC_MESSAGES=$LOCALE \
+    LC_MONETARY=$LOCALE \
+    LC_NUMERIC=$LOCALE \
+    LC_TIME=$LOCALE \
+    LC_ALL=$LOCALE
+
 # Copy init script
 COPY ./init.sh /usr/bin/init.sh
 
