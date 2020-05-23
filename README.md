@@ -2,6 +2,7 @@
 
 Docker container for Rails based on the Heroku-18 base images.
 
+
 ### Tags available
 
 * `2.3.4` *[(2.3.4/Dockerfile)](2.3.4/Dockerfile)*
@@ -10,14 +11,17 @@ Docker container for Rails based on the Heroku-18 base images.
 * `2.4.5` *[(2.4.5/Dockerfile)](2.4.5/Dockerfile)*
 * `2.5.5` *[(2.5.5/Dockerfile)](2.5.5/Dockerfile)*
 * `2.5.7` *[(2.5.7/Dockerfile)](2.5.7/Dockerfile)*
-* `latest`,`2.6.5` *[(2.6.5/Dockerfile)](2.6.5/Dockerfile)*
+* `2.6.5` *[(2.6.5/Dockerfile)](2.6.5/Dockerfile)*
+* `latest`,`2.6.6` *[(2.6.5/Dockerfile)](2.6.6/Dockerfile)*
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
 _Also there are a couple of version numbers that we have to have in sync with Heroku. Check the [Dockerfile](Dockerfile.template) for those versions and the links where the Heroku version is kept. If you see any new version feel free to open a PR!_
 
+
 ### Motivation
 The Heroku base images for ruby got [deprecated](https://github.com/heroku/docker-ruby) in favor of a more [build-your-own Dockerfile strategy](https://devcenter.heroku.com/articles/local-development-with-docker-compose). But I still feel that a base image for Rails serves its purposes. There is no point for each developer to replicate much of the instructions I've used here. The more automation the better amirite?
+
 
 ### Usage
 The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions (for example add some *post-run scripts*, see below):
@@ -31,6 +35,7 @@ Then you can either run it with standard Docker `docker run --rm -ti your-projec
 
 _For more details regarding local development with docker read this [Heroku article](https://devcenter.heroku.com/articles/local-development-with-docker-compose)_
 
+
 ### Post-run script
 This container comes with a [post-run script](init.sh) that:
 - Checks and install any missing gem.
@@ -39,6 +44,9 @@ This container comes with a [post-run script](init.sh) that:
 
 Subsequent runs will use cached changes. This is useful to avoid you from (1) having to rebuild the images each time there is a change on your Gemfile, (2) from having to run a shell just to deploy pending migrations, and (3) to precompile assets if you want to test production mode.
 
+
+### Changelog
+* 2020/05/20: Added tag `2.6.6` with updated `node`. Introducing `yarn` binary. WARNING this change will not be made backwards, hence previous tags will not have `yarn` installed.
 
 
 ### License
