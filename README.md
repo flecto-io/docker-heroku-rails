@@ -12,9 +12,12 @@ Docker container for Rails based on the Heroku-18 base images.
 * `2.5.5` *[(2.5.5/Dockerfile)](2.5.5/Dockerfile)*
 * `2.5.7` *[(2.5.7/Dockerfile)](2.5.7/Dockerfile)*
 * `2.6.5` *[(2.6.5/Dockerfile)](2.6.5/Dockerfile)*
-* `latest`,`2.6.6` *[(2.6.6/Dockerfile)](2.6.6/Dockerfile)*
+* `2.7.4` *[(2.7.4/Dockerfile)](2.7.4/Dockerfile)*
+* `latest`,`2.7.4` *[(2.7.4/Dockerfile)](2.7.4/Dockerfile)*
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
+
+_Also note that usually only the latest version is sure to be up-to-date and working - since its the version I'm using on my own projects. If other images
 
 _Also there are a couple of version numbers that we have to have in sync with Heroku. Check the [Dockerfile](Dockerfile.template) for those versions and the links where the Heroku version is kept. If you see any new version feel free to open a PR!_
 
@@ -40,7 +43,7 @@ _For more details regarding local development with docker read this [Heroku arti
 This container comes with a [post-run script](init.sh) that:
 - Checks and install any missing gem.
 - Precompile your assets if you are in production mode (checks `$RAILS_ENV` value).
-- **Run your own run other post-run scripts**. Just add them to `/app/.post-run.d/` folder (you can also use the env varaible `$POST_RUN_SCRIPT_PATH`, which has the script path).
+- **Run your own run other post-run scripts**. Just add them to `/app/user/.profile/` folder.
 
 Subsequent runs will use cached changes. This is useful to avoid you from (1) having to rebuild the images each time there is a change on your Gemfile, (2) from having to run a shell just to deploy pending migrations, and (3) to precompile assets if you want to test production mode.
 

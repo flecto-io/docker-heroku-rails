@@ -1,18 +1,18 @@
-FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
+FROM heroku/heroku:20-build
 LABEL maintainer="jfloff@rnters.com"
 
 ENV APP_PATH=/app/user \
-    HEROKU_BUILDPACK_VERSION=%%HEROKU_BUILDPACK_VERSION%% \
+    HEROKU_BUILDPACK_VERSION=20 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L15
-    RUBY_VERSION=%%RUBY_VERSION%% \
+    RUBY_VERSION=2.7.4 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
-    NODE_VERSION=%%NODE_VERSION%% \
+    NODE_VERSION=12.16.2 \
     # Check this file for YARN version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
-    YARN_VERSION=%%YARN_VERSION%%
+    YARN_VERSION=1.22.4
 
 ENV PATH=$APP_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
