@@ -31,4 +31,4 @@ jobs:
         with:
           context: 2.7.4/.
           push: true
-          tags: ${{ env.IMAGE_NAME }}:2.7.4,${{ env.IMAGE_NAME }}:latest
+          tags: ghcr.io/${{ env.IMAGE_NAME }}:2.7.4,ghcr.io/${{ env.IMAGE_NAME }}:latest
