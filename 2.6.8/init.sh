@@ -24,7 +24,7 @@ if [ "$RAILS_ENV" == "production" ]; then
   bundle exec rake assets:precompile
 fi
 
-for SCRIPT in $POST_RUN_SCRIPT_PATH/*; do
+for SCRIPT in $APP_PATH/.profile/*; do
   [ -f "$SCRIPT" ] || continue
   set -x;
   source $SCRIPT;

@@ -1,19 +1,13 @@
 # Heroku Rails Docker Image
 
-Docker container for Rails based on the Heroku-18 base images.
-
+Docker container for Rails based on the Heroku-20 base images.
 
 ### Tags available
 
-* `2.3.4` *[(2.3.4/Dockerfile)](2.3.4/Dockerfile)*
-* `2.3.7` *[(2.3.7/Dockerfile)](2.3.7/Dockerfile)*
-* `2.4.4` *[(2.4.4/Dockerfile)](2.4.4/Dockerfile)*
-* `2.4.5` *[(2.4.5/Dockerfile)](2.4.5/Dockerfile)*
-* `2.5.5` *[(2.5.5/Dockerfile)](2.5.5/Dockerfile)*
-* `2.5.7` *[(2.5.7/Dockerfile)](2.5.7/Dockerfile)*
-* `2.6.5` *[(2.6.5/Dockerfile)](2.6.5/Dockerfile)*
+* `2.6.6` *[(2.6.6/Dockerfile)](2.6.6/Dockerfile)*
+* `2.6.8` *[(2.6.8/Dockerfile)](2.6.8/Dockerfile)*
 * `2.7.4` *[(2.7.4/Dockerfile)](2.7.4/Dockerfile)*
-* `latest`,`2.7.4` *[(2.7.4/Dockerfile)](2.7.4/Dockerfile)*
+* `3.0.2` *[(3.0.2/Dockerfile)](3.0.2/Dockerfile)*
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
@@ -27,12 +21,7 @@ The Heroku base images for ruby got [deprecated](https://github.com/heroku/docke
 
 
 ### Usage
-The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions (for example add some *post-run scripts*, see below):
-```docker
-FROM jfloff/heroku-rails:latest
-# example of post-run script
-RUN echo "rake db:seed" > $POST_RUN_SCRIPT_PATH/seed.sh
-```
+The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions `FROM ghrc.io/rnters/heroku-rails:2.7.4`.
 
 Then you can either run it with standard Docker `docker run --rm -ti your-project` or, more commonly from a Docker Compose based development `$ docker-compose up web`.
 
@@ -49,7 +38,7 @@ Subsequent runs will use cached changes. This is useful to avoid you from (1) ha
 
 
 ### Changelog
-* 2020/05/20: Added tag `2.6.6` with updated `node`. Introducing `yarn` binary. WARNING this change will not be made backwards, hence previous tags will not have `yarn` installed.
+* 2021/11/01: Change image ownership to Rnters organization. Upgrade to Heroku 20 build image.
 
 
 ### License

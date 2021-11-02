@@ -1,24 +1,26 @@
-FROM heroku/heroku:18-build
-
+FROM heroku/heroku:20-build
 LABEL maintainer="jfloff@rnters.com"
 
-ENV WORKDIR_PATH=/app/user \
+ENV APP_PATH=/app/user \
+    HEROKU_BUILDPACK_VERSION=20 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L15
-    RUBY_VERSION=2.6.5 \
+    RUBY_VERSION=3.0.2 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
-    NODE_VERSION=10.15.3
+    NODE_VERSION=12.16.2 \
+    # Check this file for YARN version:
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
+    YARN_VERSION=1.22.4
 
-ENV PATH=$WORKDIR_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:${PATH} \
+ENV PATH=$APP_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
     DEBIAN_FRONTEND=noninteractive \
     # Bundler variables
     GEM_PATH=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
     GEM_HOME=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
-    BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config \
-    POST_RUN_SCRIPT_PATH=/app/.post-run.d
+    BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config
 
 # set the locale of the application
 # this is useful for rails console handling UTF8 characters
@@ -36,7 +38,7 @@ ENV LANG=$LOCALE \
 COPY ./init.sh /usr/bin/init.sh
 
 RUN set -ex ;\
-    mkdir -p $WORKDIR_PATH ;\
+    mkdir -p $APP_PATH ;\
     #####
     # Install extra dependencies
     #
@@ -56,24 +58,27 @@ RUN set -ex ;\
     # Install Ruby
     #
     mkdir -p /app/heroku/ruby/ruby-$RUBY_VERSION ;\
-    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-16/ruby-$RUBY_VERSION.tgz | tar xz -C /app/heroku/ruby/ruby-$RUBY_VERSION ;\
+    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C /app/heroku/ruby/ruby-$RUBY_VERSION ;\
     #####
     # Install Node
     #
-    curl -sL --retry 3 https://s3pository.heroku.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/ ;\
+    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/node/release/linux-x64/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/ ;\
     mv /app/heroku/ruby/node-v$NODE_VERSION-linux-x64 /app/heroku/ruby/node-$NODE_VERSION ;\
+    #####
+    # Install Yarn
+    #
+    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/yarn/release/yarn-v$YARN_VERSION.tar.gz | tar xz -C /app/heroku/ruby/ ;\
+    mv /app/heroku/ruby/yarn-v$YARN_VERSION /app/heroku/ruby/yarn-$YARN_VERSION ;\
     #####
     # Set startup script
     #
-    chmod +x /usr/bin/init.sh ;\
-    # make folder to run startup scripts
-    mkdir -p $POST_RUN_SCRIPT_PATH
+    chmod +x /usr/bin/init.sh
 
 #####
 # Install application and its gems
 #
-WORKDIR $WORKDIR_PATH
-ONBUILD ADD . $WORKDIR_PATH
+WORKDIR $APP_PATH
+ONBUILD ADD . $APP_PATH
 ONBUILD RUN set -ex ;\
     # TODO @jfloff : won't be needed when we upgrade to Rails 5
     # install bundler packed with Gemfile if we have that information in the Gemfile.lock
