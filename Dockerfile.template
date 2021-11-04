@@ -2,6 +2,7 @@ FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
 LABEL maintainer="joao@rnters.com"
 
 ENV HOME=/app \
+    HEROKU_HOME=/heroku \
     HEROKU_BUILDPACK_VERSION=%%HEROKU_BUILDPACK_VERSION%% \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
@@ -14,13 +15,13 @@ ENV HOME=/app \
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
     YARN_VERSION=%%YARN_VERSION%%
 
-ENV PATH=$HOME/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
+ENV PATH=$HOME/bin:$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION/bin:$HEROKU_HOME/ruby/ruby-$RUBY_VERSION/bin:$HEROKU_HOME/ruby/node-$NODE_VERSION/bin:$HEROKU_HOME/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
     DEBIAN_FRONTEND=noninteractive \
     # Bundler variables
-    GEM_PATH=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
-    GEM_HOME=/app/heroku/ruby/bundle/ruby/$RUBY_VERSION \
-    BUNDLE_APP_CONFIG=/app/heroku/ruby/.bundle/config
+    GEM_PATH=$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION \
+    GEM_HOME=$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION \
+    BUNDLE_APP_CONFIG=$HEROKU_HOME/ruby/.bundle/config
 
 # set the locale of the application
 # this is useful for rails console handling UTF8 characters
@@ -61,19 +62,18 @@ RUN set -ex ;\
     #------------
     # Install Ruby
     #------------
-    mkdir -p /app/heroku/ruby/ruby-$RUBY_VERSION ;\
-    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C /app/heroku/ruby/ruby-$RUBY_VERSION ;\
-    ln -s /app/heroku/ruby/ruby-$RUBY_VERSION/bin/ruby /usr/bin/ruby ;\
+    mkdir -p $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
+    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
     #------------
     # Install Node
     #------------
-    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/node/release/linux-x64/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/ ;\
-    mv /app/heroku/ruby/node-v$NODE_VERSION-linux-x64 /app/heroku/ruby/node-$NODE_VERSION ;\
+    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/node/release/linux-x64/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C $HEROKU_HOME/ruby/ ;\
+    mv $HEROKU_HOME/ruby/node-v$NODE_VERSION-linux-x64 $HEROKU_HOME/ruby/node-$NODE_VERSION ;\
     #------------
     # Install Yarn
     #------------
-    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/yarn/release/yarn-v$YARN_VERSION.tar.gz | tar xz -C /app/heroku/ruby/ ;\
-    mv /app/heroku/ruby/yarn-v$YARN_VERSION /app/heroku/ruby/yarn-$YARN_VERSION ;\
+    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/yarn/release/yarn-v$YARN_VERSION.tar.gz | tar xz -C $HEROKU_HOME/ruby/ ;\
+    mv $HEROKU_HOME/ruby/yarn-v$YARN_VERSION $HEROKU_HOME/ruby/yarn-$YARN_VERSION ;\
     #------------
     # Set startup script
     #------------
