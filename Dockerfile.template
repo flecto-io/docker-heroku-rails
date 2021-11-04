@@ -15,7 +15,7 @@ ENV HOME=/app \
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
     YARN_VERSION=%%YARN_VERSION%%
 
-ENV PATH=$HOME/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
+ENV PATH=$HOME/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
     DEBIAN_FRONTEND=noninteractive \
     # Bundler variables
