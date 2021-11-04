@@ -24,12 +24,11 @@ if [ "$RAILS_ENV" == "production" ]; then
   bundle exec rake assets:precompile
 fi
 
-for SCRIPT in $APP_PATH/.profile/*; do
-  [ -f "$SCRIPT" ] || continue
+if test -f "$HOME/.profile"; then
   set -x;
-  source $SCRIPT;
+  source $HOME/.profile;
   { set +x; } 2>/dev/null
-done
+fi
 
 set -e
 

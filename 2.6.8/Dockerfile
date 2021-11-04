@@ -1,7 +1,7 @@
 FROM heroku/heroku:20-build
 LABEL maintainer="jfloff@rnters.com"
 
-ENV APP_PATH=/app \
+ENV HOME=/app \
     HEROKU_BUILDPACK_VERSION=20 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
@@ -14,7 +14,7 @@ ENV APP_PATH=/app \
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
     YARN_VERSION=1.22.4
 
-ENV PATH=$APP_PATH/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
+ENV PATH=$HOME/bin:/app/heroku/ruby/bundle/ruby/$RUBY_VERSION/bin:/app/heroku/ruby/ruby-$RUBY_VERSION/bin/:/app/heroku/ruby/node-$NODE_VERSION/bin:/app/heroku/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
     DEBIAN_FRONTEND=noninteractive \
     # Bundler variables
@@ -38,7 +38,7 @@ ENV LANG=$LOCALE \
 COPY ./init.sh /usr/bin/init.sh
 
 RUN set -ex ;\
-    mkdir -p $APP_PATH ;\
+    mkdir -p $HOME ;\
     #####
     # Install extra dependencies
     #
@@ -77,8 +77,8 @@ RUN set -ex ;\
 #####
 # Install application and its gems
 #
-WORKDIR $APP_PATH
-ONBUILD ADD . $APP_PATH
+WORKDIR $HOME
+ONBUILD ADD . $HOME
 ONBUILD RUN set -ex ;\
     # TODO @jfloff : won't be needed when we upgrade to Rails 5
     # install bundler packed with Gemfile if we have that information in the Gemfile.lock
