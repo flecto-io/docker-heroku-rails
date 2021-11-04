@@ -39,9 +39,13 @@ COPY ./init.sh /usr/bin/init.sh
 
 RUN set -ex ;\
     mkdir -p $HOME ;\
-    #####
+    #------------
+    # Remove existing ruby
+    #------------
+    apt-get purge ruby -y ;\
+    #------------
     # Install extra dependencies
-    #
+    #------------
     apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
         tree \
@@ -54,29 +58,29 @@ RUN set -ex ;\
     rm -rf /var/lib/apt/lists/* ;\
     # fix bug when launching rails console
     ln -s /lib/x86_64-linux-gnu/libreadline.so.7 /lib/x86_64-linux-gnu/libreadline.so.6 ;\
-    #####
+    #------------
     # Install Ruby
-    #
+    #------------
     mkdir -p /app/heroku/ruby/ruby-$RUBY_VERSION ;\
     curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C /app/heroku/ruby/ruby-$RUBY_VERSION ;\
-    #####
+    #------------
     # Install Node
-    #
+    #------------
     curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/node/release/linux-x64/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C /app/heroku/ruby/ ;\
     mv /app/heroku/ruby/node-v$NODE_VERSION-linux-x64 /app/heroku/ruby/node-$NODE_VERSION ;\
-    #####
+    #------------
     # Install Yarn
-    #
+    #------------
     curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/yarn/release/yarn-v$YARN_VERSION.tar.gz | tar xz -C /app/heroku/ruby/ ;\
     mv /app/heroku/ruby/yarn-v$YARN_VERSION /app/heroku/ruby/yarn-$YARN_VERSION ;\
-    #####
+    #------------
     # Set startup script
-    #
+    #------------
     chmod +x /usr/bin/init.sh
 
-#####
+#------------
 # Install application and its gems
-#
+#------------
 WORKDIR $HOME
 ONBUILD ADD . $HOME
 ONBUILD RUN set -ex ;\
