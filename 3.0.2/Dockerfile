@@ -63,6 +63,7 @@ RUN set -ex ;\
     #------------
     mkdir -p /app/heroku/ruby/ruby-$RUBY_VERSION ;\
     curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C /app/heroku/ruby/ruby-$RUBY_VERSION ;\
+    ln -s /app/heroku/ruby/ruby-$RUBY_VERSION/bin/ruby /usr/bin/ruby ;\
     #------------
     # Install Node
     #------------
