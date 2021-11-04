@@ -32,7 +32,7 @@ _For more details regarding local development with docker read this [Heroku arti
 This container comes with a [post-run script](init.sh) that:
 - Checks and install any missing gem.
 - Precompile your assets if you are in production mode (checks `$RAILS_ENV` value).
-- **Run your own run other post-run scripts**. Just add them to `/app/user/.profile/` folder.
+- **Run your own run other post-run scripts**. Just add them to `/app/.profile/` folder.
 
 Subsequent runs will use cached changes. This is useful to avoid you from (1) having to rebuild the images each time there is a change on your Gemfile, (2) from having to run a shell just to deploy pending migrations, and (3) to precompile assets if you want to test production mode.
 

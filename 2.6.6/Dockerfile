@@ -1,7 +1,7 @@
 FROM heroku/heroku:20-build
 LABEL maintainer="jfloff@rnters.com"
 
-ENV APP_PATH=/app/user \
+ENV APP_PATH=/app \
     HEROKU_BUILDPACK_VERSION=20 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:

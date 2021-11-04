@@ -1,7 +1,8 @@
-FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
-LABEL maintainer="jfloff@rnters.com"
 
-ENV APP_PATH=/app/user \
+FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
+LABEL maintainer="joao@rnters.com"
+
+ENV APP_PATH=/app \
     HEROKU_BUILDPACK_VERSION=%%HEROKU_BUILDPACK_VERSION%% \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
