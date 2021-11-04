@@ -8,14 +8,6 @@ if [ -f Gemfile.lock ]; then
   GEMFILE_LOCK_BUNDLE_VERSION=$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock)
 fi
 
-  # add secret key base to init
-if [ ! -f /etc/profile.d/secret.sh ]; then
-  echo "export SECRET_KEY_BASE=\"$(openssl rand -base64 32)\"" > /etc/profile.d/secret.sh
-  chmod +x /etc/profile.d/secret.sh
-fi
-# export secret before anything
-source /etc/profile.d/secret.sh
-
 # if any changes to Gemfile occur between runs (e.g. if you mounted the
 # host directory in the container), it will install changes before proceeding
 bundle check || bundle install --jobs 4
