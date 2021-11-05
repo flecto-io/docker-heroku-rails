@@ -9,11 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby:
-          - 2.6.6
-          - 2.6.8
-          - 2.7.4
-          - 3.0.2
+        tags:
+          - 18-2.6.6
+          - 20-2.6.6
+          - 20-2.6.8
+          - 20-2.7.4
+          - 20-3.0.2
     steps:
       -
         name: Checkout repo
@@ -33,7 +34,7 @@ jobs:
         name: Build and push ${{ matrix.ruby }}
         uses: docker/build-push-action@v2
         with:
-          context: ${{ matrix.ruby }}/.
+          context: ${{ matrix.tags }}/.
           no-cache: true
           push: true
-          tags: ghcr.io/rnters/heroku-rails:${{ matrix.ruby }}
+          tags: ghcr.io/rnters/heroku-rails:${{ matrix.tags }}

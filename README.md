@@ -4,10 +4,13 @@ Docker container for Rails based on the Heroku-20 base images.
 
 ### Tags available
 
-* `2.6.6` *[(2.6.6/Dockerfile)](2.6.6/Dockerfile)*
-* `2.6.8` *[(2.6.8/Dockerfile)](2.6.8/Dockerfile)*
-* `2.7.4` *[(2.7.4/Dockerfile)](2.7.4/Dockerfile)*
-* `3.0.2` *[(3.0.2/Dockerfile)](3.0.2/Dockerfile)*
+* `18-2.6.6` *[(18-2.6.6/Dockerfile)](18-2.6.6/Dockerfile)*
+* `20-2.6.6` *[(20-2.6.6/Dockerfile)](20-2.6.6/Dockerfile)*
+* `20-2.6.8` *[(20-2.6.8/Dockerfile)](20-2.6.8/Dockerfile)*
+* `20-2.7.4` *[(20-2.7.4/Dockerfile)](20-2.7.4/Dockerfile)*
+* `20-3.0.2` *[(20-3.0.2/Dockerfile)](20-3.0.2/Dockerfile)*
+
+_Tag format: `<Heroku Buildpack version>-<Ruby version>`_
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
@@ -21,7 +24,7 @@ The Heroku base images for ruby got [deprecated](https://github.com/heroku/docke
 
 
 ### Usage
-The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions `FROM ghrc.io/rnters/heroku-rails:2.7.4`.
+The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions `FROM ghrc.io/rnters/heroku-rails:20-2.7.4`.
 
 Then you can either run it with standard Docker `docker run --rm -ti your-project` or, more commonly from a Docker Compose based development `$ docker-compose up web`.
 
