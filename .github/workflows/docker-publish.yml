@@ -15,6 +15,7 @@ jobs:
           - 20-2.6.8
           - 20-2.7.4
           - 20-3.0.2
+          - 20-3.0.3
     steps:
       -
         name: Checkout repo
