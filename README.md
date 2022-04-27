@@ -7,8 +7,12 @@ Docker container for Rails based on the Heroku-20 base images.
 * `18-2.6.6` *[(18-2.6.6/Dockerfile)](18-2.6.6/Dockerfile)*
 * `20-2.6.6` *[(20-2.6.6/Dockerfile)](20-2.6.6/Dockerfile)*
 * `20-2.6.8` *[(20-2.6.8/Dockerfile)](20-2.6.8/Dockerfile)*
+* `20-2.6.9` *[(20-2.6.9/Dockerfile)](20-2.6.9/Dockerfile)*
+* `20-2.6.10` *[(20-2.6.10/Dockerfile)](20-2.6.10/Dockerfile)*
 * `20-2.7.4` *[(20-2.7.4/Dockerfile)](20-2.7.4/Dockerfile)*
+* `20-2.7.5` *[(20-2.7.5/Dockerfile)](20-2.7.5/Dockerfile)*
 * `20-3.0.2` *[(20-3.0.2/Dockerfile)](20-3.0.2/Dockerfile)*
+* `20-3.0.3` *[(20-3.0.3/Dockerfile)](20-3.0.3/Dockerfile)*
 
 _Tag format: `<Heroku Buildpack version>-<Ruby version>`_
 
