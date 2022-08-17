@@ -1,19 +1,19 @@
-FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
-LABEL maintainer="joao@rnters.com"
+FROM heroku/heroku:22-build
+LABEL maintainer="jfloff@rnters.com"
 
 ENV HOME=/app \
     HEROKU_HOME=/heroku \
-    HEROKU_BUILDPACK_VERSION=%%HEROKU_BUILDPACK_VERSION%% \
+    HEROKU_BUILDPACK_VERSION=22 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/ruby_version.rb#L16
-    RUBY_VERSION=%%RUBY_VERSION%% \
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L16
+    RUBY_VERSION=3.1.2 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
-    NODE_VERSION=%%NODE_VERSION%% \
+    NODE_VERSION=16.13.1 \
     # Check this file for YARN version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
-    YARN_VERSION=%%YARN_VERSION%%
+    YARN_VERSION=1.22.17
 
 ENV PATH=$HOME/bin:$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION/bin:$HEROKU_HOME/ruby/ruby-$RUBY_VERSION/bin:$HEROKU_HOME/ruby/node-$NODE_VERSION/bin:$HEROKU_HOME/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
@@ -95,6 +95,5 @@ ONBUILD RUN set -ex ;\
     bundle config github.https true
     # avoid installing gems here so we give a chance for child images to install any dependency
     # eg. SQLite3 extension
-
 
 ENTRYPOINT ["/usr/bin/init.sh"]
