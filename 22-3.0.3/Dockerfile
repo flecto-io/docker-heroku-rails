@@ -63,7 +63,8 @@ RUN set -ex ;\
     # Install Ruby
     #------------
     mkdir -p $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
-    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
+    # heroku-22 image does not have this ruby version available
+    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-20/ruby-$RUBY_VERSION.tgz | tar xz -C $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
     #------------
     # Install Node
     #------------
