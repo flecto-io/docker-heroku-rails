@@ -1,6 +1,6 @@
 # Heroku Rails Docker Image
 
-Docker container for Rails based on the Heroku-20 base images.
+Docker container for Rails based on the Heroku base images.
 
 ### Tags available
 
@@ -14,6 +14,7 @@ Docker container for Rails based on the Heroku-20 base images.
 * `20-3.0.2` *[(20-3.0.2/Dockerfile)](20-3.0.2/Dockerfile)*
 * `20-3.0.3` *[(20-3.0.3/Dockerfile)](20-3.0.3/Dockerfile)*
 * `20-3.1.2` *[(20-3.1.2/Dockerfile)](20-3.1.2/Dockerfile)*
+* `22-3.0.3` *[(22-3.0.3/Dockerfile)](22-3.0.3/Dockerfile)*
 * `22-3.1.2` *[(22-3.1.2/Dockerfile)](22-3.1.2/Dockerfile)*
 
 _Tag format: `<Heroku Buildpack version>-<Ruby version>`_
