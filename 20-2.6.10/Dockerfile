@@ -50,6 +50,8 @@ RUN set -ex ;\
     apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
         tree \
+        # needed to download https gems
+        libssl-dev \
         # for rails rspec
         busybox \
         # utils
