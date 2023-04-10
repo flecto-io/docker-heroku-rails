@@ -90,9 +90,8 @@ ONBUILD RUN set -ex ;\
     # TODO @jfloff : won't be needed when we upgrade to Rails 5
     # install bundler packed with Gemfile if we have that information in the Gemfile.lock
     # ref: https://bundler.io/blog/2019/01/04/an-update-on-the-bundler-2-release.html
-    if [ -f Gemfile.lock ]; then GEMFILE_LOCK_BUNDLE_VERSION=$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock) ; else GEMFILE_LOCK_BUNDLE_VERSION="" ; fi ;\
-    if [ -z "$GEMFILE_LOCK_BUNDLE_VERSION" ]; then BUNDLER_INSTALL_VERSION_FLAG="" ; else BUNDLER_INSTALL_VERSION_FLAG="-v $GEMFILE_LOCK_BUNDLE_VERSION" ; fi ;\
-    gem install --no-document bundler $BUNDLER_INSTALL_VERSION_FLAG ;\
+    if [ -f Gemfile.lock ]; then GEMFILE_LOCK_BUNDLE_VERSION=$(awk '/BUNDLED WITH/{getline; print}' Gemfile.lock | xargs) ; else GEMFILE_LOCK_BUNDLE_VERSION="" ; fi ;\
+    gem install --no-document bundler $(if [ -z "$GEMFILE_LOCK_BUNDLE_VERSION" ]; then echo "" ; else echo "-v $GEMFILE_LOCK_BUNDLE_VERSION" ; fi) ;\
     # force bundle to use github https protocol
     bundle config github.https true
     # avoid installing gems here so we give a chance for child images to install any dependency
