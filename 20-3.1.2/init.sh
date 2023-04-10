@@ -11,7 +11,7 @@ fi
 # if any changes to Gemfile occur between runs (e.g. if you mounted the
 # host directory in the container), it will install changes before proceeding
 if [ -f Gemfile ]; then
-  bundle check || bundle install --jobs 4
+  bundle check || bundle install --jobs 4 --retry 3
 fi
 
 if [ "$RAILS_ENV" == "production" ]; then
