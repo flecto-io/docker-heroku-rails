@@ -6,13 +6,13 @@ ENV HOME=/app \
     HEROKU_BUILDPACK_VERSION=20 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/ruby_version.rb#L15
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/ruby_version.rb#L15
     RUBY_VERSION=2.6.6 \
     # Check this file for NODE version:
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L5
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L5
     NODE_VERSION=12.16.2 \
     # Check this file for YARN version:
-    # https://github.com/heroku/heroku-buildpack-ruby/blob/master/lib/language_pack/helpers/nodebin.rb#L13
+    # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L13
     YARN_VERSION=1.22.4
 
 ENV PATH=$HOME/bin:$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION/bin:$HEROKU_HOME/ruby/ruby-$RUBY_VERSION/bin:$HEROKU_HOME/ruby/node-$NODE_VERSION/bin:$HEROKU_HOME/ruby/yarn-$YARN_VERSION/bin:${PATH} \
