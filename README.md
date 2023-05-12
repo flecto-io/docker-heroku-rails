@@ -13,6 +13,7 @@ Docker container for Rails based on the Heroku base images.
 * `20-2.7.5` *[(20-2.7.5/Dockerfile)](20-2.7.5/Dockerfile)*
 * `20-2.7.6` *[(20-2.7.6/Dockerfile)](20-2.7.6/Dockerfile)*
 * `20-2.7.7` *[(20-2.7.7/Dockerfile)](20-2.7.7/Dockerfile)*
+* `20-2.7.8` *[(20-2.7.8/Dockerfile)](20-2.7.8/Dockerfile)*
 * `20-3.0.2` *[(20-3.0.2/Dockerfile)](20-3.0.2/Dockerfile)*
 * `20-3.0.3` *[(20-3.0.3/Dockerfile)](20-3.0.3/Dockerfile)*
 * `20-3.1.2` *[(20-3.1.2/Dockerfile)](20-3.1.2/Dockerfile)*
