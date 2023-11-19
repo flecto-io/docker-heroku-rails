@@ -24,9 +24,7 @@ _Tag format: `<Heroku Buildpack version>-<Ruby version>`_
 
 _We try to stay up-to-date with the new supported Heroku images. If you see any new one on [this page](https://devcenter.heroku.com/articles/ruby-support#supported-runtimes) feel free to open a PR!_
 
-_Also note that usually only the latest version is sure to be up-to-date and working - since its the version I'm using on my own projects. If other images
-
-_Also there are a couple of version numbers that we have to have in sync with Heroku. Check the [Dockerfile](Dockerfile.template) for those versions and the links where the Heroku version is kept. If you see any new version feel free to open a PR!_
+_There are a couple of version numbers that we have to have in sync with Heroku. Check the [Dockerfile](Dockerfile.template) for those versions and the links where the Heroku version is kept. If you see any new version feel free to open a PR!_
 
 
 ### Motivation
