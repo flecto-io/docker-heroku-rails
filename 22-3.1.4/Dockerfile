@@ -10,7 +10,7 @@ ENV HOME=/app \
     RUBY_VERSION=3.1.4 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L5
-    NODE_VERSION=16.18.1 \
+    NODE_VERSION=20.9.0 \
     # Check this file for YARN version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L13
     YARN_VERSION=1.22.19
