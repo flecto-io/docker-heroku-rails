@@ -1,5 +1,5 @@
 FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
-LABEL maintainer="joao@rnters.com"
+LABEL maintainer="joao@flecto.io"
 
 ENV HOME=/app \
     HEROKU_HOME=/heroku \

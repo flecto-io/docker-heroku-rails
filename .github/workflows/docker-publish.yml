@@ -51,4 +51,4 @@ jobs:
           context: ${{ matrix.tags }}/.
           no-cache: true
           push: true
-          tags: ghcr.io/rnters/heroku-rails:${{ matrix.tags }}
+          tags: ghcr.io/flecto-io/heroku-rails:${{ matrix.tags }}

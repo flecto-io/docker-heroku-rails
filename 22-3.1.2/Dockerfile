@@ -1,5 +1,5 @@
 FROM heroku/heroku:22-build
-LABEL maintainer="jfloff@rnters.com"
+LABEL maintainer="jfloff@flecto.io"
 
 ENV HOME=/app \
     HEROKU_HOME=/heroku \

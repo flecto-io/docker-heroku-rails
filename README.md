@@ -32,7 +32,7 @@ The Heroku base images for ruby got [deprecated](https://github.com/heroku/docke
 
 
 ### Usage
-The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions `FROM ghrc.io/rnters/heroku-rails:20-2.7.4`.
+The root folder for your Rails project must have a `Gemfile` and `Gemfile.lock` file. Then build a Dockerfile for your project with this image as base, and with other project-specific instructions `FROM ghrc.io/flecto-io/heroku-rails:20-2.7.4`.
 
 Then you can either run it with standard Docker `docker run --rm -ti your-project` or, more commonly from a Docker Compose based development `$ docker-compose up web`.
 
@@ -49,6 +49,7 @@ Subsequent runs will use cached changes. This is useful to avoid you from (1) ha
 
 
 ### Changelog
+* 2023/12/29: Change organization to flecto-io
 * 2023/04/10: Remove copy of entire app folder into container. Copy only Gemfile to install bundler.
 * 2021/11/01: Change image ownership to Rnters organization. Upgrade to Heroku 20 build image.
 
