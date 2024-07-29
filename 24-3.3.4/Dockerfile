@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 heroku/heroku:24-build
+FROM heroku/heroku:24-build
 LABEL maintainer="jfloff@flecto.io"
 
 USER root
