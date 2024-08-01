@@ -1,4 +1,4 @@
-FROM heroku/heroku:18-build
+FROM --platform=linux/amd64 heroku/heroku:18-build
 LABEL maintainer="jfloff@flecto.io"
 
 ENV HOME=/app \
