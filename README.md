@@ -4,7 +4,6 @@ Docker container for Rails based on the Heroku base images.
 
 ### Tags available
 
-* `18-2.6.6` *[(18-2.6.6/Dockerfile)](18-2.6.6/Dockerfile)*
 * `20-2.6.6` *[(20-2.6.6/Dockerfile)](20-2.6.6/Dockerfile)*
 * `20-2.6.8` *[(20-2.6.8/Dockerfile)](20-2.6.8/Dockerfile)*
 * `20-2.6.9` *[(20-2.6.9/Dockerfile)](20-2.6.9/Dockerfile)*
