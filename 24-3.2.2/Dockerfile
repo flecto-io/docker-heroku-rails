@@ -70,8 +70,12 @@ RUN set -ex ;\
     #------------
     # Install Node
     #------------
-    curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/node/release/linux-x64/node-v$NODE_VERSION-linux-x64.tar.gz | tar xz -C $HEROKU_HOME/ruby/ ;\
-    mv $HEROKU_HOME/ruby/node-v$NODE_VERSION-linux-x64 $HEROKU_HOME/ruby/node-$NODE_VERSION ;\
+    case "$ARCH" in \
+        amd64) NODE_ARCH='x64' ;;\
+        *) NODE_ARCH="$ARCH" ;;\
+    esac ;\
+    curl -sL --retry 3 https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$NODE_ARCH.tar.xz | tar xJ -C $HEROKU_HOME/ruby/ ;\
+    mv $HEROKU_HOME/ruby/node-v$NODE_VERSION-linux-$NODE_ARCH $HEROKU_HOME/ruby/node-$NODE_VERSION ;\
     #------------
     # Install Yarn
     #------------
