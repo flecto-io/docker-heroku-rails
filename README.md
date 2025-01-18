@@ -25,6 +25,7 @@ Docker container for Rails based on the Heroku base images.
 * `24-3.3.4` *[(22-3.3.4/Dockerfile)](24-3.3.4/Dockerfile)*
 * `24-3.3.5` *[(22-3.3.5/Dockerfile)](24-3.3.5/Dockerfile)*
 * `24-3.3.6` *[(22-3.3.6/Dockerfile)](24-3.3.6/Dockerfile)*
+* `24-3.3.7` *[(22-3.3.7/Dockerfile)](24-3.3.7/Dockerfile)*
 
 _Tag format: `<Heroku Buildpack version>-<Ruby version>`_
 
@@ -52,12 +53,6 @@ This container comes with a [post-run script](init.sh) that:
 - **Run your own run other post-run scripts**. Just add them to `/app/.profile/` folder.
 
 Subsequent runs will use cached changes. This is useful to avoid you from (1) having to rebuild the images each time there is a change on your Gemfile, (2) from having to run a shell just to deploy pending migrations, and (3) to precompile assets if you want to test production mode.
-
-
-### Changelog
-* 2023/12/29: Change organization to flecto-io
-* 2023/04/10: Remove copy of entire app folder into container. Copy only Gemfile to install bundler.
-* 2021/11/01: Change image ownership to Rnters organization. Upgrade to Heroku 20 build image.
 
 
 ### License
