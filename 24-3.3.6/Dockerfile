@@ -1,19 +1,20 @@
-FROM heroku/heroku:%%HEROKU_BUILDPACK_VERSION%%-build
-LABEL maintainer="joao@flecto.io"
+FROM heroku/heroku:24-build
+LABEL maintainer="jfloff@flecto.io"
 
+USER root
 ENV HOME=/app \
     HEROKU_HOME=/heroku \
-    HEROKU_BUILDPACK_VERSION=%%HEROKU_BUILDPACK_VERSION%% \
+    HEROKU_BUILDPACK_VERSION=24 \
     # The versions are updated according to Heroku Ruby Buildpack
     # Check this file for RUBY version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/ruby_version.rb#L16
-    RUBY_VERSION=%%RUBY_VERSION%% \
+    RUBY_VERSION=3.3.6 \
     # Check this file for NODE version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L4
-    NODE_VERSION=%%NODE_VERSION%% \
+    NODE_VERSION=22.11.0 \
     # Check this file for YARN version:
     # https://github.com/heroku/heroku-buildpack-ruby/blob/main/lib/language_pack/helpers/nodebin.rb#L5
-    YARN_VERSION=%%YARN_VERSION%%
+    YARN_VERSION=1.22.22
 
 ENV PATH=$HOME/bin:$HEROKU_HOME/ruby/bundle/ruby/$RUBY_VERSION/bin:$HEROKU_HOME/ruby/ruby-$RUBY_VERSION/bin:$HEROKU_HOME/ruby/node-$NODE_VERSION/bin:$HEROKU_HOME/ruby/yarn-$YARN_VERSION/bin:${PATH} \
     # so no interactions happen while installing packages
@@ -60,13 +61,12 @@ RUN set -ex ;\
         vim \
         ; \
     rm -rf /var/lib/apt/lists/* ;\
-    # fix bug when launching rails console
-    ln -s /lib/x86_64-linux-gnu/libreadline.so.7 /lib/x86_64-linux-gnu/libreadline.so.6 ;\
     #------------
     # Install Ruby
     #------------
+    # url ref: https://github.com/heroku/heroku-buildpack-ruby/blob/main/bin/support/download_ruby#L32
     mkdir -p $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
-    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.us-east-1.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/ruby-$RUBY_VERSION.tgz | tar xz -C $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
+    curl -sL --retry 3 https://heroku-buildpack-ruby.s3.amazonaws.com/heroku-$HEROKU_BUILDPACK_VERSION/$ARCH/ruby-$RUBY_VERSION.tgz | tar xz -C $HEROKU_HOME/ruby/ruby-$RUBY_VERSION ;\
     #------------
     # Install Node
     #------------
@@ -97,6 +97,5 @@ ONBUILD RUN set -ex ;\
     bundle config github.https true
     # avoid installing gems here so we give a chance for child images to install any dependency
     # eg. SQLite3 extension
-
 
 ENTRYPOINT ["/usr/bin/init.sh"]
