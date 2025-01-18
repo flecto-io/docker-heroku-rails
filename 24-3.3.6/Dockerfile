@@ -81,7 +81,7 @@ RUN set -ex ;\
     # Install Yarn
     #------------
     curl -sL --retry 3 https://s3.amazonaws.com/heroku-nodebin/yarn/release/yarn-v$YARN_VERSION.tar.gz | tar xz -C $HEROKU_HOME/ruby/ ;\
-    mv $HEROKU_HOME/ruby/yarn-v$YARN_VERSION $HEROKU_HOME/ruby/yarn-$YARN_VERSION ;\
+    mv $HEROKU_HOME/ruby/package $HEROKU_HOME/ruby/yarn-$YARN_VERSION ;\
     #------------
     # Set startup script
     #------------
