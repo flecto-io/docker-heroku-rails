@@ -33,6 +33,7 @@ jobs:
           - 24-3.3.6
           - 24-3.3.7
           - 24-3.3.8
+          - 24-3.3.9
     steps:
       # Checkout this repo
       # https://github.com/actions/checkout

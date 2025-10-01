@@ -27,6 +27,7 @@ Docker container for Rails based on the Heroku base images.
 * `24-3.3.6` *[(22-3.3.6/Dockerfile)](24-3.3.6/Dockerfile)*
 * `24-3.3.7` *[(22-3.3.7/Dockerfile)](24-3.3.7/Dockerfile)*
 * `24-3.3.8` *[(22-3.3.8/Dockerfile)](24-3.3.8/Dockerfile)*
+* `24-3.3.9` *[(22-3.3.9/Dockerfile)](24-3.3.9/Dockerfile)*
 
 _Tag format: `<Heroku Buildpack version>-<Ruby version>`_
 
